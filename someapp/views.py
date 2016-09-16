@@ -48,11 +48,19 @@ class MyChatBotView(generic.View):
 def post_facebook_message(fbid, message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	
+	'''
 	output_text = getHoro(message_text)
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 	print status.json()
+	'''
+
+	output_dict = getHoro(message_text)
+	for i in range(0, len(output_dict)):
+		response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":str(output_dict[i]}})
+		status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+		
 
 def getHoro(text):
 	url = 'http://horoscope-api.herokuapp.com/horoscope'
@@ -91,14 +99,20 @@ def getHoro(text):
 	elif 'pisces' in text:
 		zodiac = 'pisces'
 	else:
-		return 'Sorry. Your sunsign wasn\'t found. Please try again.'
+	#	return 'Sorry. Your sunsign wasn\'t found. Please try again.'
+		return ['Sorry. Your sunsign wasn\'t found. Please try again.']
 	
 	url = url + '/' + time + '/' + zodiac
 	r = requests.get(url=url)
 	data = r.json()
-	scoped_data = str(data['horoscope'])
 
-	if len(scoped_data) > 315:
-		scoped_data = scoped_data[:315] + '...'
+	scoped_data = zodiac + ':' + str(data['horoscope'])
 
-	return scoped_data
+#	if len(scoped_data) > 315:
+#		scoped_data = scoped_data[:315] + '...'
+
+#	return scoped_data
+
+	scoped_dict = [scoped_data[i:i+315] for i in range(0, len(scoped_data), 315)]
+
+	return scoped_dict

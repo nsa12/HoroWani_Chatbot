@@ -67,11 +67,11 @@ def getHoro(text):
 	text = text.lower()
 
 	time = 'today'
-	if 'week' in text:
+	if ('week' or 'weekly') in text:
 		time = 'week'
-	elif 'month' in text:
+	elif ('month' or 'monthly') in text:
 		time = 'month'
-	elif 'year' in text:
+	elif ('year' or 'yearly' or 'annual' in text:
 		time = 'year'
 
 	if 'aries' in text:

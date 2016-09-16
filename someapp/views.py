@@ -71,7 +71,7 @@ def getHoro(text):
 		time = 'week'
 	elif ('month' or 'monthly') in text:
 		time = 'month'
-	elif ('year' or 'yearly' or 'annual' in text:
+	elif ('year' or 'yearly' or 'annual') in text:
 		time = 'year'
 
 	if 'aries' in text:

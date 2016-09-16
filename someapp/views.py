@@ -11,12 +11,9 @@ import json
 import requests
 import re
 
-import requests
-from bs4 import BeautifulSoup as BS
-
 # Create your views here.
 
-VERIY_TOKEN = 'HoroscopeBot'
+VERIFY_TOKEN = 'HoroscopeBot'
 PAGE_ACCESS_TOKEN = 'EAAFG7c6eT2UBAKcP1QRPyWMBZAZA37Um3zNoQ3jFYm4KCDAdRxhV3CgQTaSoAlAcQsu6XWoa4cM7wC2NtKatCsETNweF5MjARiyPEdZAwKSry2ZCZC6hIFCcSC7sdAL9UH6rd8rLOcwKGxLXuEFoesECj39Jv7XFdRBZC3qUOZCZAAZDZD'
 
 def index(request):
@@ -96,12 +93,16 @@ def getHoro(text):
 	else:
 		zodiac = 'none'
 	
-	scoped_data = 'Sorry. Your sunsign wasn\'t found. Please try again.'
-	if zodiac != 'none':
+	scoped_data = ' '
+
+	if 'none' in zodiac:
+		scoped_data = 'Sorry. Your sunsign wasn\'t found. Please try again.'
+
+	else:
 		url = url + '/' + time + '/' + zodiac
     	r = requests.get(url=url)
     	data = r.json()
-	    scoped_data = str(data['horoscope'])
+    	scoped_data = str(data['horoscope'])
 
     if len(scoped_data) > 315:
         scoped_data = scoped_data[:315] + '...'

@@ -58,7 +58,7 @@ def post_facebook_message(fbid, message_text):
 
 	output_dict = getHoro(message_text)
 	for i in range(0, len(output_dict)):
-		response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":str(output_dict[i]}})
+		response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":str(output_dict[i])}})
 		status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 		
 

@@ -91,20 +91,14 @@ def getHoro(text):
 	elif 'pisces' in text:
 		zodiac = 'pisces'
 	else:
-		zodiac = 'none'
+		return 'Sorry. Your sunsign wasn\'t found. Please try again.'
 	
-	scoped_data = ' '
+	url = url + '/' + time + '/' + zodiac
+	r = requests.get(url=url)
+	data = r.json()
+	scoped_data = str(data['horoscope'])
 
-	if 'none' in zodiac:
-		scoped_data = 'Sorry. Your sunsign wasn\'t found. Please try again.'
+	if len(scoped_data) > 315:
+		scoped_data = scoped_data[:315] + '...'
 
-	else:
-		url = url + '/' + time + '/' + zodiac
-    	r = requests.get(url=url)
-    	data = r.json()
-    	scoped_data = str(data['horoscope'])
-
-    if len(scoped_data) > 315:
-        scoped_data = scoped_data[:315] + '...'
-
-    return scoped_data
+	return scoped_data

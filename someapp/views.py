@@ -57,7 +57,7 @@ def post_facebook_message(fbid, message_text):
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 	print status.json()
 
-def getHoro(text='aries'):
+def getHoro(text):
 	url = 'http://horoscope-api.herokuapp.com/horoscope'
 	text = text.lower()
 
@@ -69,8 +69,9 @@ def getHoro(text='aries'):
 	elif 'year' in text:
 		time = 'year'
 
-	zodiac = 'aries'
-	if 'taurus' in text:
+	if 'aries' in text:
+		zodiac = 'aries'
+	elif 'taurus' in text:
 		zodiac = 'taurus'
 	elif 'gemini' in text:
 		zodiac = 'gemini'
@@ -92,13 +93,16 @@ def getHoro(text='aries'):
 		zodiac = 'aquarius'
 	elif 'pisces' in text:
 		zodiac = 'pisces'
+	else:
+		zodiac = 'none'
 	
-	url = url + '/' + time + '/' + zodiac
-    r = requests.get(url=url)
-    data = r.json()
-    
-    scoped_data = str(data['horoscope'])
-    
+	scoped_data = 'Sorry. Your sunsign wasn\'t found. Please try again.'
+	if zodiac != 'none':
+		url = url + '/' + time + '/' + zodiac
+    	r = requests.get(url=url)
+    	data = r.json()
+	    scoped_data = str(data['horoscope'])
+
     if len(scoped_data) > 315:
         scoped_data = scoped_data[:315] + '...'
 

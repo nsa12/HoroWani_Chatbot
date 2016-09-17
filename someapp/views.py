@@ -46,7 +46,6 @@ class MyChatBotView(generic.View):
 
 def post_facebook_message(fbid, message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-	
 	output_text = getHoro(message_text)
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
 	
@@ -62,9 +61,10 @@ def getHoro(text):
 		time = 'week'
 	elif ('month' or 'monthly') in text:
 		time = 'month'
-	elif ('year' or 'yearly' or 'annual') in text:
+	elif ('year' or 'yearly' or 'annual' or '2016') in text:
 		time = 'year'
 
+	zodiac = 'aries'
 	if 'aries' in text:
 		zodiac = 'aries'
 	elif 'taurus' in text:

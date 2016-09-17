@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 import json
 import requests
-import re
 
 # Create your views here.
 
@@ -99,7 +98,6 @@ def getHoro(text):
 	elif 'pisces' in text:
 		zodiac = 'pisces'
 	else:
-	#	return 'Sorry. Your sunsign wasn\'t found. Please try again.'
 		return ['Sorry. Your sunsign wasn\'t found. Please try again.']
 	
 	url = url + '/' + time + '/' + zodiac

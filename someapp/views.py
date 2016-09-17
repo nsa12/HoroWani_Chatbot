@@ -95,7 +95,7 @@ def getHoro(text):
 	
 	url = url + '/' + time + '/' + zodiac
 	r = requests.get(url=url).text
-	data = r.json()
+	data = json.loads(r)
 
 	zodiac[0] = zodiac[0].upper()
 

@@ -47,10 +47,11 @@ class MyChatBotView(generic.View):
 def post_facebook_message(fbid, message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	output_text = getHoro(message_text)
+	print 'output text: ' + output_text
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":output_text}})
-	
+		
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
-	print status.json()
+	print 'status.json(): ' + status.json()
 
 def getHoro(text):
 	url = 'http://horoscope-api.herokuapp.com/horoscope'
@@ -93,7 +94,7 @@ def getHoro(text):
 		return 'Sorry. Your sunsign wasn\'t found. Please try again.'
 	
 	url = url + '/' + time + '/' + zodiac
-	r = requests.get(url=url)
+	r = requests.get(url=url).text
 	data = r.json()
 
 	zodiac[0] = zodiac[0].upper()

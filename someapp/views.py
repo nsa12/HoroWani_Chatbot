@@ -97,7 +97,7 @@ def getHoro(text):
 	r = requests.get(url=url).text
 	data = json.loads(r)
 
-	zodiac[0] = zodiac[0].upper()
+#	zodiac[0] = zodiac[0].upper()
 
 	scoped_data = zodiac + ': ' + str(data['horoscope'])
 

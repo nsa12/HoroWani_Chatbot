@@ -10,8 +10,6 @@ from django.utils.decorators import method_decorator
 import json
 import requests
 
-# Create your views here.
-
 VERIFY_TOKEN = 'HoroscopeBot'
 PAGE_ACCESS_TOKEN = 'EAAFG7c6eT2UBAKcP1QRPyWMBZAZA37Um3zNoQ3jFYm4KCDAdRxhV3CgQTaSoAlAcQsu6XWoa4cM7wC2NtKatCsETNweF5MjARiyPEdZAwKSry2ZCZC6hIFCcSC7sdAL9UH6rd8rLOcwKGxLXuEFoesECj39Jv7XFdRBZC3qUOZCZAAZDZD'
 
